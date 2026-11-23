@@ -35,6 +35,25 @@ From an agent session you can also install it with the built-in tool:
 plugin_manager  action: install_bundle  target: <absolute path to this folder>
 ```
 
+### Lazy mode: paste this to an agent inside DSH
+
+The agent clones the repo, installs the bundle, and tells you when to restart. Copy the block, paste it, done — no parameters to fill in.
+
+```text
+Please install this DSH plugin: https://github.com/novv1/dsh-turn-end-reminder
+
+1. Clone it to %USERPROFILE%\dsh-plugins\dsh-turn-end-reminder (i.e. C:\Users\<you>\dsh-plugins\).
+   Do not put it under $DSH_HOME, and do not edit package.json or cordis.patch.yml inside my profile.
+   git clone https://github.com/novv1/dsh-turn-end-reminder.git "%USERPROFILE%\dsh-plugins\dsh-turn-end-reminder"
+   If git fails on the proxy, retry once with: git -c "http.https://github.com/.proxy=" clone ...
+2. Confirm that directory contains both package.json and cordis.patch.yml.
+3. Run the plugin_manager tool with action install_bundle and target set to that absolute path.
+4. already-installed means it was already there, skip it; applied means it worked.
+5. If you have no plugin_manager tool, just tell me the manual route: DSH -> Settings -> Plugins -> Add plugin, and pick that folder.
+6. Finish with one message covering: where it went, whether it worked, whether I need to restart DSH,
+   and how to verify (send any message, wait for the reply to finish, look for the "A turn finished" card bottom-right).
+```
+
 ## Usage tutorial
 
 1. **Install and restart**, as above.

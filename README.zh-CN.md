@@ -35,6 +35,25 @@
 plugin_manager  action: install_bundle  target: <这个文件夹的绝对路径>
 ```
 
+### 懒人版：把下面这段直接贴给 DSH 里的 Agent
+
+Agent 会自己克隆、自己装、自己告诉你什么时候该重启。复制粘贴就行，不用补充参数。
+
+```text
+帮我安装这个 DSH 插件：https://github.com/novv1/dsh-turn-end-reminder
+
+1. 克隆到 %USERPROFILE%\dsh-plugins\dsh-turn-end-reminder（即 C:\Users\<你的用户名>\dsh-plugins\ 下）。
+   不要放进 $DSH_HOME，也不要手改我的 profile 里的 package.json 或 cordis.patch.yml。
+   git clone https://github.com/novv1/dsh-turn-end-reminder.git "%USERPROFILE%\dsh-plugins\dsh-turn-end-reminder"
+   如果 git 提示代理连不上，用 git -c "http.https://github.com/.proxy=" clone 重试一次。
+2. 确认那个目录里同时存在 package.json 和 cordis.patch.yml。
+3. 用 plugin_manager 工具执行 install_bundle，target 填这个目录的绝对路径。
+4. 返回 already-installed 就说明装过了，跳过；返回 applied 说明装好了。
+5. 如果你没有 plugin_manager 工具，就告诉我手动安装的路径：DSH → 设置 → 插件 → 添加插件，选中这个目录。
+6. 最后一次性告诉我：装到哪了、成功没有、要不要重启 DSH、以及怎么验证
+   （随便发一句话，等回复结束，看右下角有没有出现「一轮对话完成」的卡片）。
+```
+
 ## 使用教程
 
 1. **装好并重启**（见上）。
