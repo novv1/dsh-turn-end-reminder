@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "Turn-end reminder",
+    "description": "Shows a toast in the DSH page and plays a chime when a conversation turn finishes, so you can step away and be called back.",
+    "detail": "docs/DETAIL.md"
+  }
+}

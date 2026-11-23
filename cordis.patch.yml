@@ -1,0 +1,16 @@
+# 对话完成提醒：一行 Host 插件 + 一个页面内提醒（client.js）。
+# 页面内提醒默认开启，不需要配置。
+# 下面的 config 只影响 Windows 托盘气泡那条通道；这台机器上系统不显示它，
+# 所以默认关闭。你的 Windows 能弹通知时，把它们改成 true 即可。
+- insert:
+    - id: turn-end-reminder
+      name: dsh-turn-end-reminder
+      config:
+        # 短于此毫秒数的一轮不提醒；默认 3 秒。
+        minDurationMs: 3000
+        # 两次提醒的最小间隔，防止多会话同时结束时连环响。
+        minGapMs: 2500
+        # Windows 托盘气泡（本机实测系统不显示，默认关）。
+        balloon: false
+        # Windows 提示音（本机实测不响，默认关；页面内提示音由 client.js 负责）。
+        sound: false

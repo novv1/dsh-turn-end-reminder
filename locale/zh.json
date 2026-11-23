@@ -1,0 +1,7 @@
+{
+  "meta": {
+    "title": "对话完成提醒",
+    "description": "一轮对话跑完时在 DSH 页面右下角弹提示并响一声，切去做别的事也能被叫回来。",
+    "detail": "docs/DETAIL.md"
+  }
+}
