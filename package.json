@@ -1,6 +1,6 @@
 {
   "name": "dsh-turn-end-reminder",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "description": "Reminds you when a DeepSeek Harness conversation turn finishes: an in-page toast with a chime, plus an optional Windows tray notification.",
   "type": "module",

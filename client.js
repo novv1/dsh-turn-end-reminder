@@ -57,6 +57,31 @@ window.__ModuleLoader__.load({
     return {
       inject: ['slots', 'uiWorkspace'],
       apply(ctx) {
+        /** 跟着 DSH 的语言走；拿不到就退回浏览器语言。 */
+        const localeId = (() => {
+          try {
+            return String(ctx.locale?.getLocale?.()?.id ?? navigator.language ?? '')
+          } catch {
+            return String(navigator.language ?? '')
+          }
+        })()
+        const english = /^en/i.test(localeId)
+        const text = english
+          ? {
+            title: 'A turn finished',
+            hint: 'Click to return to this conversation',
+            fallback: 'Current session',
+            open: 'Open this conversation',
+            close: 'Dismiss',
+          }
+          : {
+            title: '一轮对话完成',
+            hint: '点击回到这个会话',
+            fallback: '当前会话',
+            open: '打开这个会话',
+            close: '关闭提示',
+          }
+
         /** 跳到该会话；失败只记日志，不打断提示。 */
         const openSession = (sessionId) => {
           try {
@@ -88,7 +113,7 @@ window.__ModuleLoader__.load({
                 setToasts(list => [...list.slice(-2), {
                   key,
                   sessionId: id,
-                  title: row?.displayTitle ?? '当前会话',
+                  title: row?.displayTitle ?? text.fallback,
                 }])
                 chime()
               }
@@ -112,7 +137,7 @@ window.__ModuleLoader__.load({
               className: 'dsh-teto-card',
               role: 'button',
               tabIndex: 0,
-              title: '打开这个会话',
+              title: text.open,
               onClick: () => {
                 dismiss(toast.key)
                 openSession(toast.sessionId)
@@ -126,14 +151,14 @@ window.__ModuleLoader__.load({
             },
             h('span', { className: 'dsh-teto-dot', 'aria-hidden': true }),
             h('div', { className: 'dsh-teto-body' },
-              h('div', { className: 'dsh-teto-title' }, '一轮对话完成'),
+              h('div', { className: 'dsh-teto-title' }, text.title),
               h('div', { className: 'dsh-teto-sub' }, toast.title),
-              h('div', { className: 'dsh-teto-hint' }, '点击回到这个会话'),
+              h('div', { className: 'dsh-teto-hint' }, text.hint),
             ),
             h('button', {
               type: 'button',
               className: 'dsh-teto-close',
-              'aria-label': '关闭提示',
+              'aria-label': text.close,
               onClick: (event) => {
                 event.stopPropagation()
                 dismiss(toast.key)
